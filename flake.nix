@@ -10,9 +10,8 @@
       in
       {
         devShell = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            linux.dev
-          ];
+          buildInputs = with pkgs; (linux.nativeBuildInputs ++ [
+          ]);
         };
       }
     );

@@ -60,7 +60,6 @@ linux-clean: | $(LINUX_DIR)
 $(LINUX_DIR)/.config: $(LINUX_PKG)/config* | $(LINUX_DIR)
 	(cd $(LINUX_DIR) && scripts/kconfig/merge_config.sh -m $(abspath $^) && make olddefconfig ) || rm $(LINUX_DIR)/.config
 
-
 prepare: $(LINUX_DIR)/.config
 	cd $(LINUX_DIR) && make prepare
 

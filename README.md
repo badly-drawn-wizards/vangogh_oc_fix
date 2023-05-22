@@ -8,7 +8,7 @@ This is mainly a proof of concept as getting it to work is unwieldy and will nee
 # Disclaimer
 This software is distributed under the terms of the GPLv3 license. Please refer to the license for the full disclaimer and understand that by using this software, you do so at your own risk.
 
-The module does a sanity check to ensure that it is trying to modify the right value, but this may
+The module does a sanity check to ensure that it is trying to modify the right value, but this may fail and write to some unknown place in kernel memory which BAD™.
 
 # Future plans
 Wait an see if someone else does it better. Otherwise I'll do it myself.

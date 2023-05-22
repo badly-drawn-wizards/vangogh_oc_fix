@@ -11,12 +11,12 @@ This software is distributed under the terms of the GPLv3 license. Please refer 
 The module does a sanity check to ensure that it is trying to modify the right value, but this may fail and write to some unknown place in kernel memory which BAD™.
 
 # Future plans
-Wait an see if someone else does it better. Otherwise I'll do it myself.
+Wait and see if someone else does it better. Otherwise I'll do it myself.
 
 # How to build
 - Install all tools required to build linux kernel
 - Set variables in Makefile appropriate for your SteamDeck's linux kernel.
-- On your build system
+- On your build machine
     - `make prepare`
     - `make modules -j<Number of cores on your machine>`
     - `make build`

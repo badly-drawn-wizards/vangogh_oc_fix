@@ -17,6 +17,9 @@ Wait and see if someone else does it better. Otherwise I'll do it myself.
 - Install all tools required to build linux kernel
 - Set variables in Makefile appropriate for your SteamDeck's linux kernel.
 - On your build machine
+    - `make download-linux`
+    - `make linux`
+    - `make set-version`
     - `make prepare`
     - `make modules -j<Number of cores on your machine>`
     - `make build`

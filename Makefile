@@ -26,13 +26,11 @@ clean: $(HEADERS_DIR)
 	make -C $(HEADERS_BUILD) M=$(shell pwd)/module clean
 
 PHONEY += install
-install: _install
-_install: $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz
+install: $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz
 	depmod -a
 
 PHONEY += install-conf
-install-conf: _install-conf
-_install-conf: _install $(MODULES_LOAD_DIR)/vangogh_oc_fix.conf $(MODPROBE_DIR)/vangogh_oc_fix.conf
+install-conf: $(MODULES_LOAD_DIR)/vangogh_oc_fix.conf $(MODPROBE_DIR)/vangogh_oc_fix.conf
 
 PHONEY += download-headers
 download-headers: steamos-headers.tar.zst

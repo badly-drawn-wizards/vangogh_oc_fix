@@ -10,24 +10,18 @@ This software is distributed under the terms of the GPLv3 license. Please refer 
 
 The module does a sanity check to ensure that it is trying to modify the right value, but this may fail and write to some unknown place in kernel memory which BAD™.
 
-# Future plans
-Wait and see if someone else does it better. Otherwise I'll do it myself.
-
-# How to build
+# How to build & install
 - Install all tools required to build linux kernel
 - Set variables in Makefile appropriate for your SteamDeck's linux kernel.
-- On your build machine
-    - `make build`
-    - Your module should now be at `module/vangogh_oc_fix.ko.xz`
-- On your SteamDeck
-    - On your SteamDeck create the folder `/lib/modules/$(uname -r)/extra`. You will need `sudo`. Copy  into the `extra` folder.
-    - `sudo depmod -a`
+- `make build` to build
+- `sudo make install` to install the module
+- `sudo make install-conf MODULE_FREQ=<freq in Mhz>` to automatically load the module with the given frequency
     
 # How to run
 
 You can load the module with:
 
-`sudo modprobe vangogh_oc_fix cpu_default_soft_max_freq=<Max clock speed in Mhz>`. 
+`sudo modprobe vangogh_oc_fix cpu_default_soft_max_freq=<freq in Mhz>`. 
 
 Note that this is still limited by the clock speed set in your BIOS and only
 determines the maximum that can be set through the AMD PowerPlay interface

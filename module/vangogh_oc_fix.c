@@ -50,11 +50,13 @@ static int __kprobes handler_pre(struct kprobe *p, struct pt_regs *regs)
     }
     prev = smu->cpu_default_soft_max_freq;
 
-    pr_info("Setting cpu_default_soft_max_freq from %d to %d", prev, cpu_default_soft_max_freq);
-    // Prolly don't need the lock, but w/e
-    mutex_lock(&smu->message_lock);
-    smu->cpu_default_soft_max_freq = cpu_default_soft_max_freq;
-    mutex_unlock(&smu->message_lock);
+    if( prev != cpu_default_soft_max_freq ) {
+        pr_info("Setting cpu_default_soft_max_freq from %d to %d", prev, cpu_default_soft_max_freq);
+        // Prolly don't need the lock, but w/e
+        mutex_lock(&smu->message_lock);
+        smu->cpu_default_soft_max_freq = cpu_default_soft_max_freq;
+        mutex_unlock(&smu->message_lock);
+    }
 #endif
     return 0;
 }

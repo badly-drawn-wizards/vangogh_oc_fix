@@ -15,6 +15,7 @@ MODULES_EXTRA_DIR := $(MODULES_DIR)/extra
 MODULES_LOAD_DIR := /etc/modules-load.d
 MODULE_LOAD_LINE := "vangogh_oc_fix"
 MODULE_FREQ := 3500
+MODPROBE_DIR := /etc/modprobe.d
 MODPROBE_LINE := "options vangogh_oc_fix cpu_default_soft_max_freq=$(MODULE_FREQ)"
 
 PHONEY := build

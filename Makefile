@@ -1,9 +1,9 @@
-RELEASE_CHANNEL := jupiter-rel
+RELEASE_CHANNEL ?= jupiter-rel
 NEPTUNE_NAME := neptune
 LINUX_PKGBASE := linux-$(NEPTUNE_NAME)
-LINUX_GIT_TAG := 5.13.0-valve36
+LINUX_GIT_TAG ?= 5.13.0-valve36
 LINUX_URL_TAG := $(subst -,.,$(LINUX_GIT_TAG))
-LINUX_REL := 1
+LINUX_REL ?= 1
 LINUX_NAME := $(LINUX_PKGBASE)-$(LINUX_URL_TAG)-$(LINUX_REL)
 UNAME := $(LINUX_GIT_TAG)-$(LINUX_REL)-$(NEPTUNE_NAME)
 LINUX_HEADERS_TAR := linux-neptune-headers-$(LINUX_URL_TAG)-$(LINUX_REL)-x86_64.pkg.tar.zst
@@ -14,7 +14,7 @@ MODULES_DIR := /lib/modules/$(UNAME)
 MODULES_EXTRA_DIR := $(MODULES_DIR)/extra
 MODULES_LOAD_DIR := /etc/modules-load.d
 MODULE_LOAD_LINE := "vangogh_oc_fix"
-MODULE_FREQ := 3500
+MODULE_FREQ ?= 3500
 MODPROBE_DIR := /etc/modprobe.d
 MODPROBE_LINE := "options vangogh_oc_fix cpu_default_soft_max_freq=$(MODULE_FREQ)"
 

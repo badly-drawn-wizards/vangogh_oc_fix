@@ -70,10 +70,13 @@ $(MODULES_EXTRA_DIR): | $(MODULES_DIR)
 $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko.xz | $(MODULES_EXTRA_DIR)
 	cp $< $@
 
-$(MODULES_LOAD_DIR)/vangogh_oc_fix.conf:
+PHONEY += _always
+_always:
+
+$(MODULES_LOAD_DIR)/vangogh_oc_fix.conf: _always
 	echo $(MODULE_LOAD_LINE) > $@
 
-$(MODPROBE_DIR)/vangogh_oc_fix.conf:
+$(MODPROBE_DIR)/vangogh_oc_fix.conf: _always
 	echo $(MODPROBE_LINE) > $@
 
 .PHONEY: $(PHONEY)

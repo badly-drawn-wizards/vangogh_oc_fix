@@ -17,27 +17,34 @@ MODULE_LOAD_LINE := "vangogh_oc_fix"
 MODULE_FREQ := 3500
 MODPROBE_LINE := "options vangogh_oc_fix cpu_default_soft_max_freq=$(MODULE_FREQ)"
 
-
+PHONEY += build
 build: module/vangogh_oc_fix.ko.xz
 
+PHONEY += clean
 clean: $(HEADERS_DIR)
 	make -C $(HEADERS_BUILD) M=$(shell pwd)/module clean
 
+PHONEY += install
 install: _install
 _install: $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz
 	depmod -a
 
+PHONEY += install-conf
 install-conf: _install-conf
 _install-conf: _install $(MODULE_LOAD_DIR)/vangogh_oc_fix.conf $(MODPROBE_DIR)/vangogh_oc_fix.conf
 
+PHONEY += download-headers
 download-headers: steamos-headers.tar.zst
 
+PHONEY += url
 url:
 	echo STEAMOS_HEADERS_URL $(STEAMOS_HEADERS_URL)
 
+PHONEY += git-tag
 git-tag:
 	echo $(LINUX_GIT_TAG)
 
+PHONEY += uname
 uname:
 	echo $(UNAME)
 
@@ -64,7 +71,8 @@ $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko.xz | $(MODUL
 
 $(MODULE_LOAD_DIR)/vangogh_oc_fix.conf:
 	echo $(MODULE_LOAD_LINE) > $@
+
 $(MODPROBE_DIR)/vangogh_oc_fix.conf:
 	echo $(MODPROBE_LINE) > $@
 
-.PHONEY: build install install-conf clean download-headers git-tag uname url
+.PHONEY: $(PHONEY)

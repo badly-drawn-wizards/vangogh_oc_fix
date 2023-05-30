@@ -51,7 +51,7 @@ static int __kprobes handler_pre(struct kprobe *p, struct pt_regs *regs)
 
     prev = smu->cpu_default_soft_max_freq;
 
-    if (prev != cpu_default_soft_max_freq)
+    if (prev == cpu_default_soft_max_freq)
         return 0;
 
     pr_info("Setting cpu_default_soft_max_freq from %d to %d", prev, cpu_default_soft_max_freq);

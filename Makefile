@@ -10,14 +10,39 @@ LINUX_HEADERS_TAR := linux-neptune-headers-$(LINUX_URL_TAG)-$(LINUX_REL)-x86_64.
 STEAMOS_MIRROR := https://steamdeck-packages.steamos.cloud/archlinux-mirror
 STEAMOS_HEADERS_URL := $(STEAMOS_MIRROR)/$(RELEASE_CHANNEL)/os/x86_64/$(LINUX_HEADERS_TAR)
 HEADERS_BUILD := $(shell pwd)/steamos-headers/usr/lib/modules/$(UNAME)/build
+MODULES_DIR := /lib/modules/$(UNAME)
+MODULES_EXTRA_DIR := $(MODULES_DIR)/extra
+MODULES_LOAD_DIR := /etc/modules-load.d
+MODULE_LOAD_LINE := "vangogh_oc_fix"
+MODULE_FREQ := 3500
+MODPROBE_LINE := "options vangogh_oc_fix cpu_default_soft_max_freq=$(MODULE_FREQ)"
+
+
+build: module/vangogh_oc_fix.ko.xz
+
+clean: $(HEADERS_DIR)
+	make -C $(HEADERS_BUILD) M=$(shell pwd)/module clean
+
+install: _install
+_install: $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz
+	depmod -a
+
+install-conf: _install-conf
+_install-conf: _install $(MODULE_LOAD_DIR)/vangogh_oc_fix.conf $(MODPROBE_DIR)/vangogh_oc_fix.conf
+
+download-headers: steamos-headers.tar.zst
 
 url:
 	echo STEAMOS_HEADERS_URL $(STEAMOS_HEADERS_URL)
 
+git-tag:
+	echo $(LINUX_GIT_TAG)
+
+uname:
+	echo $(UNAME)
+
 steamos-headers.tar.zst:
 	wget $(STEAMOS_HEADERS_URL) -O$@
-
-download-headers: steamos-headers.tar.zst
 
 steamos-headers: steamos-headers.tar.zst
 	mkdir $@
@@ -31,15 +56,15 @@ module/vangogh_oc_fix.ko: $(HEADERS_BUILD) module/*.c
 module/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko
 	xz --keep --check=crc32 --lzma2=dict=512KiB $< -c > $@
 
-build: module/vangogh_oc_fix.ko.xz
+$(MODULES_EXTRA_DIR): | $(MODULES_DIR)
+	mkdir $(MODULES_EXTRA_DIR)
 
-clean: $(HEADERS_DIR)
-	make -C $(HEADERS_BUILD) M=$(shell pwd)/module clean
+$(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko.xz | $(MODULES_EXTRA_DIR)
+	cp $< $@
 
-git-tag:
-	echo $(LINUX_GIT_TAG)
+$(MODULE_LOAD_DIR)/vangogh_oc_fix.conf:
+	echo $(MODULE_LOAD_LINE) > $@
+$(MODPROBE_DIR)/vangogh_oc_fix.conf:
+	echo $(MODPROBE_LINE) > $@
 
-uname:
-	echo $(UNAME)
-
-.PHONEY: all clean download-headers git-tag uname build url
+.PHONEY: build install install-conf clean download-headers git-tag uname url

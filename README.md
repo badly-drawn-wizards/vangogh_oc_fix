@@ -23,8 +23,6 @@ Wait and see if someone else does it better. Otherwise I'll do it myself.
     - On your SteamDeck create the folder `/lib/modules/$(uname -r)/extra`. You will need `sudo`. Copy  into the `extra` folder.
     - `sudo depmod -a`
     
-I don't have the heart to do a clean run of this, so please report if you have any problems.
-    
 # How to run
 
 You can load the module with:

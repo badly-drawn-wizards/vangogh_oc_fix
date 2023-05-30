@@ -27,4 +27,4 @@ Note that this is still limited by the clock speed set in your BIOS and only
 determines the maximum that can be set through the AMD PowerPlay interface
 (which PowerTools uses).
 
-This will only run for your current boot. You can add modules to load on boot, but I will not elaborate on that here.
+This will only run for your current boot. To run every boot, use the `install-conf` target mentioned above

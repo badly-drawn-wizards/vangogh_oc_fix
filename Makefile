@@ -17,7 +17,7 @@ MODULE_LOAD_LINE := "vangogh_oc_fix"
 MODULE_FREQ := 3500
 MODPROBE_LINE := "options vangogh_oc_fix cpu_default_soft_max_freq=$(MODULE_FREQ)"
 
-PHONEY += build
+PHONEY := build
 build: module/vangogh_oc_fix.ko.xz
 
 PHONEY += clean
@@ -69,7 +69,7 @@ $(MODULES_EXTRA_DIR): | $(MODULES_DIR)
 $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko.xz | $(MODULES_EXTRA_DIR)
 	cp $< $@
 
-$(MODULE_LOAD_DIR)/vangogh_oc_fix.conf:
+$(MODULES_LOAD_DIR)/vangogh_oc_fix.conf:
 	echo $(MODULE_LOAD_LINE) > $@
 
 $(MODPROBE_DIR)/vangogh_oc_fix.conf:

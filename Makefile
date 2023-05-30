@@ -32,7 +32,7 @@ _install: $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz
 
 PHONEY += install-conf
 install-conf: _install-conf
-_install-conf: _install $(MODULE_LOAD_DIR)/vangogh_oc_fix.conf $(MODPROBE_DIR)/vangogh_oc_fix.conf
+_install-conf: _install $(MODULES_LOAD_DIR)/vangogh_oc_fix.conf $(MODPROBE_DIR)/vangogh_oc_fix.conf
 
 PHONEY += download-headers
 download-headers: steamos-headers.tar.zst

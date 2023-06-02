@@ -1,14 +1,10 @@
 RELEASE_CHANNEL ?= jupiter-rel
-NEPTUNE_NAME := neptune
-LINUX_PKGBASE := linux-$(NEPTUNE_NAME)
-LINUX_GIT_TAG ?= 5.13.0-valve36
-LINUX_URL_TAG := $(subst -,.,$(LINUX_GIT_TAG))
-LINUX_REL ?= 1
-LINUX_NAME := $(LINUX_PKGBASE)-$(LINUX_URL_TAG)-$(LINUX_REL)
-UNAME := $(LINUX_GIT_TAG)-$(LINUX_REL)-$(NEPTUNE_NAME)
-LINUX_HEADERS_TAR := linux-neptune-headers-$(LINUX_URL_TAG)-$(LINUX_REL)-x86_64.pkg.tar.zst
+UNAME ?= $(shell uname -r)
 STEAMOS_MIRROR := https://steamdeck-packages.steamos.cloud/archlinux-mirror
-STEAMOS_HEADERS_URL := $(STEAMOS_MIRROR)/$(RELEASE_CHANNEL)/os/x86_64/$(LINUX_HEADERS_TAR)
+ifndef LINUX_HEADERS_TAR
+$(error Set LINUX_HEADERS_TAR to the header files for "$(UNAME)" relative to $(STEAMOS_MIRROR) or STEAMOS_HEADERS_URL to the full path)
+endif
+STEAMOS_HEADERS_URL ?= $(STEAMOS_MIRROR)/$(RELEASE_CHANNEL)/os/x86_64/$(LINUX_HEADERS_TAR)
 HEADERS_BUILD := $(shell pwd)/steamos-headers/usr/lib/modules/$(UNAME)/build
 MODULES_DIR := /lib/modules/$(UNAME)
 MODULES_EXTRA_DIR := $(MODULES_DIR)/extra
@@ -34,14 +30,6 @@ install-conf: $(MODULES_LOAD_DIR)/vangogh_oc_fix.conf $(MODPROBE_DIR)/vangogh_oc
 
 PHONEY += download-headers
 download-headers: steamos-headers.tar.zst
-
-PHONEY += url
-url:
-	echo STEAMOS_HEADERS_URL $(STEAMOS_HEADERS_URL)
-
-PHONEY += git-tag
-git-tag:
-	echo $(LINUX_GIT_TAG)
 
 PHONEY += uname
 uname:

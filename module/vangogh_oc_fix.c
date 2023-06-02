@@ -39,7 +39,7 @@ int smu_sanity_check(struct smu_context* smu) {
     }
     asic = adev->asic_type;
     if(asic != CHIP_VANGOGH) {
-        pr_err("ASIC Name is not CHIP_VANGOGH but %d", asic);
+        pr_err("ASIC Name is not CHIP_VANGOGH but %d. smu->cpu_default_soft_max_freq is %d", asic, smu->cpu_default_soft_max_freq);
         return -1;
     }
     return 0;

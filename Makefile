@@ -1,7 +1,9 @@
 UNAME ?= $(shell uname -r)
 STEAMOS_MIRROR := https://steamdeck-packages.steamos.cloud/archlinux-mirror
 ifndef LINUX_HEADERS_TAR
+ifndef STEAMOS_HEADERS_URL
 $(error Set LINUX_HEADERS_TAR to the header files for "$(UNAME)" relative to $(STEAMOS_MIRROR) or STEAMOS_HEADERS_URL to the full path)
+endif
 endif
 STEAMOS_HEADERS_URL ?= $(STEAMOS_MIRROR)/$(LINUX_HEADERS_TAR)
 HEADERS_BUILD := $(shell pwd)/steamos-headers/usr/lib/modules/$(UNAME)/build

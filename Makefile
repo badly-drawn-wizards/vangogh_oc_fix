@@ -1,10 +1,9 @@
-RELEASE_CHANNEL ?= jupiter-rel
 UNAME ?= $(shell uname -r)
 STEAMOS_MIRROR := https://steamdeck-packages.steamos.cloud/archlinux-mirror
 ifndef LINUX_HEADERS_TAR
 $(error Set LINUX_HEADERS_TAR to the header files for "$(UNAME)" relative to $(STEAMOS_MIRROR) or STEAMOS_HEADERS_URL to the full path)
 endif
-STEAMOS_HEADERS_URL ?= $(STEAMOS_MIRROR)/$(RELEASE_CHANNEL)/os/x86_64/$(LINUX_HEADERS_TAR)
+STEAMOS_HEADERS_URL ?= $(STEAMOS_MIRROR)/$(LINUX_HEADERS_TAR)
 HEADERS_BUILD := $(shell pwd)/steamos-headers/usr/lib/modules/$(UNAME)/build
 MODULES_DIR := /lib/modules/$(UNAME)
 MODULES_EXTRA_DIR := $(MODULES_DIR)/extra

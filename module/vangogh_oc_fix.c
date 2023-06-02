@@ -27,15 +27,17 @@ static struct kprobe kp = {
 };
 
 int smu_sanity_check(struct smu_context* smu) {
+    struct amdgpu_device *adev
+    enum amd_asic_type asic;
     if (!smu) {
         pr_err("'smu' is null");
     }
-    struct amdgpu_device *adev = smu->adev;
-    enum amd_asic_type asic = adev->asic_type;
+    adev = smu->adev;
     if (!adev) {
         pr_err("smu->adev is null");
         return -1;
     }
+    asic = adev->asic_type;
     if(asic != CHIP_VANGOGH) {
         pr_err("ASIC Name is not CHIP_VANGOGH but %d", asic);
         return -1;

@@ -3,14 +3,14 @@ MODULES_DIR ?= /lib/modules/$(UNAME)
 HEADERS_BUILD ?= $(MODULES_DIR)/build
 PKGBASE := $(shell (cat $(MODULES_DIR)/pkgbase || echo "linux-neptune-<version>"))
 ifeq (PKGBASE,"linux-neptune-61")
-	HEADERS_HAVE_EXTRA_SHIT := y
+HEADERS_HAVE_EXTRA_SHIT := y
 else
 ifeq (PKGBASE,"linux-neptune")
-	HEADERS_HAVE_EXTRA_SHIT := n
+HEADERS_HAVE_EXTRA_SHIT := n
 else
 # Probably and some more
 # HEADERS_HAVE_EXTRA_SHIT := y
-	$(error "This module has not been tested on other versions, remove this at your own peril")
+$(error "This module has not been tested on other versions, remove this at your own peril")
 endif
 endif
 MODULES_EXTRA_DIR := $(MODULES_DIR)/extra

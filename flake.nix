@@ -17,6 +17,8 @@
           ];
           NIX_LD = lib.fileContents "${pkgs.stdenv.cc}/nix-support/dynamic-linker";
           buildInputs = with pkgs; (linux.nativeBuildInputs ++ [
+            pacman
+            fakeroot
           ]);
         };
       }

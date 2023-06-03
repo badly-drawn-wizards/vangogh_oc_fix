@@ -9,6 +9,7 @@ MODULE_FREQ ?= 3500
 MODPROBE_DIR = /etc/modprobe.d
 MODPROBE_LINE = "options vangogh_oc_fix cpu_default_soft_max_freq=$(MODULE_FREQ)"
 MODULE_AMD_HEADERS_DIR = $(PWD)/module/amd_headers/$(HEADERS_KERNEL_VERSION)
+MAKE = make -C $(HEADERS_BUILD) CONFIG_MODULE_AMD_HEADERS_DIR=$(MODULE_AMD_HEADERS_DIR) CONFIG_GCC_PLUGINS=n M=$(shell pwd)/module
 
 PHONEY := build
 build: module/vangogh_oc_fix.ko.xz
@@ -18,7 +19,7 @@ $(HEADERS_BUILD):
 
 PHONEY += clean
 clean: $(HEADERS_DIR)
-	make -C $(HEADERS_BUILD) M=$(shell pwd)/module clean
+	$(MAKE) M=$(shell pwd)/module clean
 
 PHONEY += install
 install: $(MODULES_EXTRA_DIR)/vangogh_oc_fix.ko.xz
@@ -32,11 +33,7 @@ uname:
 	@echo $(UNAME)
 
 module/vangogh_oc_fix.ko: $(HEADERS_BUILD) module/Makefile module/*.c module/*.h
-	make -C $(HEADERS_BUILD) \
-		CONFIG_MODULE_AMD_HEADERS_DIR=$(MODULE_AMD_HEADERS_DIR) \
-		CONFIG_GCC_PLUGINS=n \
-		M=$(shell pwd)/module \
-		modules
+	$(MAKE) modules
 
 module/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko
 	xz --keep --check=crc32 --lzma2=dict=512KiB $< -c > $@

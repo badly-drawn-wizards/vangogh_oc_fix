@@ -33,7 +33,7 @@ uname:
 
 module/vangogh_oc_fix.ko: $(HEADERS_BUILD) module/Makefile module/*.c module/*.h
 	make -C $(HEADERS_BUILD) \
-		MODULE_AMD_HEADERS_DIR=$(MODULE_AMD_HEADERS_DIR) \
+		CONFIG_MODULE_AMD_HEADERS_DIR=$(MODULE_AMD_HEADERS_DIR) \
 		CONFIG_GCC_PLUGINS=n \
 		M=$(shell pwd)/module \
 		modules

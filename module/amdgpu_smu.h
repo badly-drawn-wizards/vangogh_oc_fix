@@ -128,6 +128,7 @@ struct smu_temperature_range {
 	int mem_crit_max;
 	int mem_emergency_max;
 	int software_shutdown_temp;
+#warning "If Valve put their linux source on a public git repo that would nice. I wouldn't be doing this dodgy shit."
 #if LINUX_VERSION_MAJOR == 6
     int software_shutdown_temp_offset;
 #elif LINUX_VERSION_MAJOR == 5

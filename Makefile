@@ -2,10 +2,10 @@ UNAME ?= $(shell uname -r)
 MODULES_DIR ?= /lib/modules/$(UNAME)
 HEADERS_BUILD ?= $(MODULES_DIR)/build
 PKGBASE := $(shell (cat $(MODULES_DIR)/pkgbase || echo "linux-neptune-<version>"))
-ifeq (PKGBASE,"linux-neptune-61")
+ifeq ($(PKGBASE),"linux-neptune-61")
 HEADERS_HAVE_EXTRA_SHIT := y
 else
-ifeq (PKGBASE,"linux-neptune")
+ifeq ($(PKGBASE),"linux-neptune")
 HEADERS_HAVE_EXTRA_SHIT := n
 else
 # Probably and some more

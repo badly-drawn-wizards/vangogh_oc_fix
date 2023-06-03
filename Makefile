@@ -1,7 +1,7 @@
 UNAME ?= $(shell uname -r)
 MODULES_DIR ?= /lib/modules/$(UNAME)
 HEADERS_BUILD ?= $(MODULES_DIR)/build
-HEADERS_KERNEL_VERSION = $(shell make -C $(HEADERS_BUILD) kernelversion)
+HEADERS_KERNEL_VERSION = $(shell make -s -C $(HEADERS_BUILD) kernelversion)
 MODULES_EXTRA_DIR = $(MODULES_DIR)/extra
 MODULES_LOAD_DIR = /etc/modules-load.d
 MODULE_LOAD_LINE = "vangogh_oc_fix"
@@ -55,7 +55,5 @@ $(MODULES_LOAD_DIR)/vangogh_oc_fix.conf: _always
 
 $(MODPROBE_DIR)/vangogh_oc_fix.conf: _always
 	@echo $(MODPROBE_LINE) > $@
-
-include ./linux-header-extract/include.mk
 
 .PHONEY: $(PHONEY)

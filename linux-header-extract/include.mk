@@ -29,6 +29,3 @@ $(HEADERS_DIR)/LICENSES: $(LINUX_SRC)/LICENSES
 
 PHONEY += extract-headers
 extract-headers: $(HEADERS_DIR)/Makefile $(HEADERS_DIR)/COPYING $(HEADERS_DIR)/LICENSES
-
-PHONEY += test
-test:

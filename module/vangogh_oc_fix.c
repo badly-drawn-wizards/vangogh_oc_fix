@@ -9,6 +9,7 @@
  * You will see the trace data in /var/log/messages and on the console
  * whenever kernel_clone() is invoked to create a new process.
  */
+#include "amdgpu_smu.h"
 #include <linux/kernel.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
@@ -26,20 +27,33 @@ static struct kprobe kp = {
 	.symbol_name = symbol,
 };
 
-int smu_sanity_check(struct smu_context* smu) {
+#define STOCK_FREQ 3500
+int smu_sanity_check(struct smu_context* smu, uint32_t *prev) {
     struct amdgpu_device *adev;
     enum amd_asic_type asic;
     if (!smu) {
-        pr_err("'smu' is null");
+        pr_warn("'smu' is null");
+        return -1;
     }
+    *prev = smu->cpu_default_soft_max_freq;
+
+    if (*prev == cpu_default_soft_max_freq)
+        return -1;
+    }
+
+    if(*prev != STOCK_FREQ) {
+        pr_warn("Refusing to modify smu->cpu_default_soft_max_freq when not stock value. Reboot if you want to apply a different cpu_default_soft_max_freq");
+        return -1;
+    }
+
     adev = smu->adev;
     if (!adev) {
         pr_err("smu->adev is null");
         return -1;
     }
     asic = adev->asic_type;
-    if(asic != CHIP_VANGOGH) {
-        pr_err("ASIC Name is not CHIP_VANGOGH but %d. smu->cpu_default_soft_max_freq is %d", asic, smu->cpu_default_soft_max_freq);
+    if(!(asic == CHIP_VANGOGH || asic == CHIP_IP_DISCOVERY)) {
+        pr_err("ASIC Name is not CHIP_VANGOGH or CHIP_IP_DISCOVERY but %d. smu->cpu_default_soft_max_freq is %d", asic, *prev);
         return -1;
     }
     return 0;
@@ -51,14 +65,7 @@ static int __kprobes handler_pre(struct kprobe *p, struct pt_regs *regs)
 #ifdef CONFIG_X86
     struct smu_context *smu = (struct smu_context*)regs->di;
     uint32_t prev;
-    if (smu_sanity_check(smu)) {
-        pr_err("smu_context does look right. Refusing to modify amdgpu smu limits");
-        return 0;
-    }
-
-    prev = smu->cpu_default_soft_max_freq;
-
-    if (prev == cpu_default_soft_max_freq)
+    if (smu_sanity_check(smu, &prev))
         return 0;
 
     pr_info("Setting cpu_default_soft_max_freq from %d to %d", prev, cpu_default_soft_max_freq);

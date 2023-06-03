@@ -39,9 +39,8 @@ int smu_sanity_check(struct smu_context* smu, uint32_t *prev) {
 
     if (*prev == cpu_default_soft_max_freq)
         return -1;
-    }
 
-    if(*prev != STOCK_FREQ) {
+    if (*prev != STOCK_FREQ) {
         pr_warn("Refusing to modify smu->cpu_default_soft_max_freq when not stock value. Reboot if you want to apply a different cpu_default_soft_max_freq");
         return -1;
     }

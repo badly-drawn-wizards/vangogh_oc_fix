@@ -2,15 +2,17 @@ UNAME ?= $(shell uname -r)
 MODULES_DIR ?= /lib/modules/$(UNAME)
 HEADERS_BUILD ?= $(MODULES_DIR)/build
 PKGBASE := $(shell (cat $(MODULES_DIR)/pkgbase || echo "linux-neptune-<version>"))
+ifndef CONFIG_HEADERS_HAVE_EXTRA_SHIT
 ifeq ($(PKGBASE),linux-neptune-61)
-HEADERS_HAVE_EXTRA_SHIT := y
+CONFIG_HEADERS_HAVE_EXTRA_SHIT := y
 else
 ifeq ($(PKGBASE),linux-neptune)
-HEADERS_HAVE_EXTRA_SHIT := n
+CONFIG_HEADERS_HAVE_EXTRA_SHIT := n
 else
 # Probably and some more
 # HEADERS_HAVE_EXTRA_SHIT := y
 $(error "This module has not been tested on other versions, remove this at your own peril")
+endif
 endif
 endif
 MODULES_EXTRA_DIR := $(MODULES_DIR)/extra
@@ -41,8 +43,8 @@ PHONEY += uname
 uname:
 	@echo $(UNAME)
 
-module/vangogh_oc_fix.ko: $(HEADERS_BUILD) module/*.c
-	make -C $(HEADERS_BUILD) CONFIG_GCC_PLUGINS=n HEADERS_HAVE_EXTRA_SHIT=$(HEADERS_HAVE_EXTRA_SHIT) M=$(shell pwd)/module modules
+module/vangogh_oc_fix.ko: $(HEADERS_BUILD) module/Makefile module/*.c module/*.h
+	make -C $(HEADERS_BUILD) CONFIG_GCC_PLUGINS=n CONFIG_HEADERS_HAVE_EXTRA_SHIT=$(HEADERS_HAVE_EXTRA_SHIT) M=$(shell pwd)/module modules
 
 module/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko
 	xz --keep --check=crc32 --lzma2=dict=512KiB $< -c > $@

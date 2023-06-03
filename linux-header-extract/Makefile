@@ -18,13 +18,10 @@ $(HEADERS_DIR)/%.h: $(LINUX_SRC)/%.h
 	mkdir -p $(shell dirname $@)
 	cp $< $@
 
-define ENDL
-endef
-
 $(HEADERS_DIR)/Makefile: $(LINUX_SRC_AMD_HEADERS:$(LINUX_SRC)/%.h=$(HEADERS_DIR)/%.h)
 	mkdir -p $(shell dirname $@)
 
-	( echo "ccflags-m = \\"; echo '$(LINUX_HEADERS_ALL_DIRS:$(HEADERS_DIR)/%=-I$$(CONFIG_MODULE_AMD_HEADERS_DIR)/%)' ) > $@
+	( echo "ccflags-y += \\"; echo '$(LINUX_HEADERS_ALL_DIRS:$(HEADERS_DIR)/%=-I$$(CONFIG_MODULE_AMD_HEADERS_DIR)/%)' ) > $@
 
 $(HEADERS_DIR)/COPYING: $(LINUX_SRC)/COPYING
 	cp $< $@

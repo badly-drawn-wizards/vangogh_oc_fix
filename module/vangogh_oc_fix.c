@@ -13,7 +13,7 @@
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/kprobes.h>
-#include "amdgpu_smu.h"
+#include <amdgpu_smu.h>
 
 static char symbol[KSYM_NAME_LEN] = "vangogh_od_edit_dpm_table";
 

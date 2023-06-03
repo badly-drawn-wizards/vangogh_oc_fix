@@ -32,7 +32,7 @@ PHONEY += uname
 uname:
 	@echo $(UNAME)
 
-module/vangogh_oc_fix.ko: $(HEADERS_BUILD) module/Makefile module/*.c module/*.h
+module/vangogh_oc_fix.ko: $(HEADERS_BUILD) module/Makefile module/*.c
 	$(MAKE) modules
 
 module/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko

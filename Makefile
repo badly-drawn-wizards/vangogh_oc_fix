@@ -42,7 +42,7 @@ uname:
 	@echo $(UNAME)
 
 module/vangogh_oc_fix.ko: $(HEADERS_BUILD) module/*.c
-	make -C $(HEADERS_BUILD) CONFIG_GCC_PLUGINS=n CONFIG_HEADERS_HAVE_EXTRA_SHIT=$(HEADERS_HAVE_EXTRA_SHIT) M=$(shell pwd)/module modules
+	make -C $(HEADERS_BUILD) CONFIG_GCC_PLUGINS=n HEADERS_HAVE_EXTRA_SHIT=$(HEADERS_HAVE_EXTRA_SHIT) M=$(shell pwd)/module modules
 
 module/vangogh_oc_fix.ko.xz: module/vangogh_oc_fix.ko
 	xz --keep --check=crc32 --lzma2=dict=512KiB $< -c > $@

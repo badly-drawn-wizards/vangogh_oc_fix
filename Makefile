@@ -8,7 +8,7 @@ MODULE_LOAD_LINE = "vangogh_oc_fix"
 MODULE_FREQ ?= 3500
 MODPROBE_DIR = /etc/modprobe.d
 MODPROBE_LINE = "options vangogh_oc_fix cpu_default_soft_max_freq=$(MODULE_FREQ)"
-MODULE_AMD_HEADERS_DIR = ./amd_headers/$(HEADERS_KERNEL_VERSION)
+MODULE_AMD_HEADERS_DIR = $(PWD)/module/amd_headers/$(HEADERS_KERNEL_VERSION)
 
 PHONEY := build
 build: module/vangogh_oc_fix.ko.xz

@@ -128,6 +128,12 @@ struct smu_temperature_range {
 	int mem_crit_max;
 	int mem_emergency_max;
 	int software_shutdown_temp;
+#if LINUX_VERSION_MAJOR == 6
+    int software_shutdown_temp_offset;
+#elif LINUX_VERSION_MAJOR == 5
+#else
+#error "This module has not been tested on current linux version. Remove error at own risk"
+#endif
 };
 
 #define SMU_FEATURE_MAX	(64)

@@ -7,6 +7,3 @@ tmp/
 
 *.tar.gz
 *.tar.zst
-steamos-pkgbuild/
-steamos-headers/
-linux/

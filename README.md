@@ -25,8 +25,10 @@ The module does a sanity check to ensure that it is trying to modify the right v
 
 # How to add support specific kernels
 
-This project depends on unstable internel APIs of the amdgpu driver. In version `0.0.1` I created c header files to mirror the header files in the kernel, but this not a great idea. In this version I copy the header files for a specific kernel version and store them for each version in source control. 
+This project depends on unstable internel APIs of the amdgpu<sup>[1]</sup> driver. In version `0.0.1` I created c header files to mirror the header files in the kernel, but this not a great idea. In this version I copy the header files for a specific kernel version and store them for each version in source control.
 
 Right now I have only added suport for `6.1.21-valve1`. If you want support for, as of writing, stable release `5.*.*`, then use version `0.0.1`.
 
 To add support for a kernel version, find the the linux-nepture source for your release channel and version on the [SteamDeck archlinux-mirror](https://steamdeck-packages.steamos.cloud/archlinux-mirror/sources/) and extract it to `./linux-header-extract/linux-pkg`. Then run `make linux-pkg-prepare` followed by `make extract-headers`. You can then use it for yourself or submit a PR so others won't need this process.
+
+[1] In addition to what the name of the driver suggests, it also exposes the interface that PowerTools uses to adjust the CPU clock.

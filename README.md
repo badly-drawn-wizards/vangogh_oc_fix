@@ -1,7 +1,7 @@
 # Description
 A linux kernel module to override AMD Van Gogh APU PowerPlay limits for CPU.
 This is useful if you have overclocked your SteamDeck but still want to use
-PowerTools to set clock limits. 
+PowerTools to set CPU clock limits. You do not need this for GPU overclocking.
 
 Note that you still need a `pt_oc.json` to tell PowerTools that it can go that hard. Conservesly, the way PowerTools works as of writing this (2023-03-06) will not go past stock settings even if you have a `pt_oc.json` but not this module. Similarly, you still need to set your maximum clock speed through the BIOS, either through SmokelessUMAF or SD_Unlocker depending on your BIOS version.
 

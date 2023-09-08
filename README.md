@@ -23,18 +23,26 @@ value, but this may fail and write to some unknown place in kernel memory which
 BAD™.
 
 # How to build & install
-- Disable read only mode on your SteamDeck
-- Install `base-devel` with pacman
-- `make build` to build
-    - If linux headers are not installed, it will tell which package to install.
-      Once installed, rerun `make build`
-- `sudo make install` to install the module
-- You can either:
-  - Run it in the current boot with `sudo modprobe vangogh_oc_fix
-    cpu_default_soft_max_freq=<freq in Mhz>`.
-  - Run it every boot with `sudo make install-conf MODULE_FREQ=<freq in Mhz>`.
-    you will need to run `sudo modprobe vangogh_oc_fix` to run for the current
-    boot.
+Step-by-step guide to build & install it on SteamOS 3.4.10:
+
+- Go to desktop mode
+- Open terminal and type or paste `sudo steamos-readonly disable` and type your root password
+- On the same terminal type or paste `sudo pacman -S base-devel` and confirm with `y` + Enter
+- Download `0.0.1` source from [0.0.1 release](https://github.com/badly-drawn-wizards/vangogh_oc_fix/releases/tag/0.0.1)
+- Extract the source folder `vangogh_oc_fix-0.0.1`
+- Open the new `vangogh_oc_fix-0.0.1` folder
+- Right click on an empty space inside the folder and click Open terminal here
+- On the new terminal type or paste `make build`
+- Read the text about missing headers, copy & paste the command it reads on the same terminal
+- Type or paste `make build` again
+- Type or paste `sudo make install`
+- Now you can either:
+  - Run it in the current boot with `sudo modprobe vangogh_oc_fix cpu_default_soft_max_freq=<freq in Mhz>`
+
+  - Run it every boot with `sudo make install-conf MODULE_FREQ=<freq in Mhz>`
+   - You will need to run `sudo modprobe vangogh_oc_fix` to run for the current boot
+- On terminal type or paste `sudo steamos-readonly enable`
+- Now you are done, no need to mess with it until a new SteamOS update breaks PowerTools OC again
 
 # How to add support specific kernels
 

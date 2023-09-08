@@ -39,8 +39,7 @@ Step-by-step guide to build & install it on SteamOS 3.4.10:
 - Now you can either:
   - Run it in the current boot with `sudo modprobe vangogh_oc_fix cpu_default_soft_max_freq=<freq in Mhz>`
 
-  - Run it every boot with `sudo make install-conf MODULE_FREQ=<freq in Mhz>`
-   - You will need to run `sudo modprobe vangogh_oc_fix` to run for the current boot
+  - Run it every boot with `sudo make install-conf MODULE_FREQ=<freq in Mhz>` You will need to run `sudo modprobe vangogh_oc_fix` to run for the current boot
 - On terminal type or paste `sudo steamos-readonly enable`
 - Now you are done, no need to mess with it until a new SteamOS update breaks PowerTools OC again
 

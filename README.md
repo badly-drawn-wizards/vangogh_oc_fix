@@ -1,3 +1,6 @@
+# Disclaimer
+I am longer actively working on this project, but will accept PRs. If someone is willing to take over this project let me know.
+
 # Description
 A linux kernel module to override AMD Van Gogh APU PowerPlay limits for CPU.
 This is useful if you have overclocked your SteamDeck but still want to use

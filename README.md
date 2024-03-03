@@ -16,6 +16,8 @@ You will need to reinstall the module each SteamOS update as it wipes the file
 system. Hopefully smarter people will make an easier fix, or the limit in the
 amdgpu driver will be made configurable.
 
+Autostart service currently broken
+
 # Disclaimer
 This software is distributed under the terms of the GPLv3 license. Please refer
 to the license for the full disclaimer and understand that by using this
@@ -47,14 +49,10 @@ in the kernel, but this not a great idea. In this version I copy the header
 files for a specific kernel version and store them for each version in source
 control.
 
-Right now I have only added suport for `6.1.21-valve1`. If you want support for,
+Right now I have only added suport for `6.1.52-valve16`. If you want support for,
 as of writing, stable release `5.*.*`, then use version `0.0.1`.
 
-To add support for a kernel version, find the the linux-nepture source for your
-release channel and version on the [SteamDeck
-archlinux-mirror](https://steamdeck-packages.steamos.cloud/archlinux-mirror/sources/)
-and extract it to `./linux-header-extract/linux-pkg`. Then run `make
-linux-pkg-prepare` followed by `make extract-headers`. You can then use it for
+To add support for your kernel version, enter the linux-header-extract directory and run get.sh. You can then use it for
 yourself or submit a PR so others won't need this process.
 
 [1] In addition to what the name of the driver suggests, it also exposes the

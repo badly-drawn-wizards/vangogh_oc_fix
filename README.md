@@ -53,7 +53,8 @@ control.
 Right now I have only added suport for `6.1.52-valve16`. If you want support for,
 as of writing, stable release `5.*.*`, then use version `0.0.1`.
 
-To add support for your kernel version, enter the linux-header-extract directory and run get.sh. You can then use it for
+To add support for your kernel version, enter the linux-header-extract directory and run get.sh.  Then run `make
+linux-pkg-prepare` followed by `make extract-headers`. You can then use it for
 yourself or submit a PR so others won't need this process.
 
 [1] In addition to what the name of the driver suggests, it also exposes the

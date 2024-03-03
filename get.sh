@@ -2,5 +2,6 @@ export UNAME=$(uname -r)
 export VERSION=$(echo $(UNAME) |awk -F"-" '{print $NF}')
 CUT=${UNAME/-/.}
 CUT=${CUT/-neptune-$VERSION/}
-curl -L https://steamdeck-packages.steamos.cloud/archlinux-mirror/sources/jupiter-main/linux-neptune-${VERSION}-${CUT}.src.tar.gz -O - | tar -xz
-mv linux-neptune-* linux-pkg
+curl -L https://steamdeck-packages.steamos.cloud/archlinux-mirror/sources/jupiter-main/linux-neptune-${VERSION}-${CUT}.src.tar.gz -o linux-pkg.tar.gz
+mv ./linux-neptune-* ./linux-pkg
+rm ./linux-pkg.tar.gz

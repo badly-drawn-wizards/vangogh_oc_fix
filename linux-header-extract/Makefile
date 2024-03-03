@@ -9,6 +9,14 @@ LINUX_SRC_AMD_DIR=$(LINUX_SRC)/drivers/gpu/drm/amd
 LINUX_SRC_AMD_HEADERS = $(shell find $(LINUX_SRC_AMD_DIR) -name '*.h')
 HEADERS_DIR = ../module/amd_headers/$(LINUX_SRC_KERNEL_VERSION)
 LINUX_HEADERS_ALL_DIRS = $(shell find $(HEADERS_DIR)/drivers -type d)
+UNAME = $(shell uname -r)
+
+
+PHONEY += pkg-get
+linux-pkg-get:
+	export VERSION = $(shell echo $(UNAME) |awk -F"-" '{print $NF}')
+	CUT ?= ${UNAME##jupiter-[^0-9]}
+	curl -LO /https://steamdeck-packages.steamos.cloud/archlinux-mirror/sources/jupiter-main/linux-neptune$(VERSION)-$(CUT).src.tar.gz
 
 PHONEY += linux-pkg-prepare
 linux-pkg-prepare: | $(LINUX_PKG_DIR)

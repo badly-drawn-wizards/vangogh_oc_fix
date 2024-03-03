@@ -10,7 +10,8 @@ Note that you still need a `pt_oc.json` to tell PowerTools that it can go that
 hard. Conversely, the way PowerTools works as of writing this (2023-03-06) will
 not go past stock settings even if you have a `pt_oc.json` but not this module.
 Similarly, you still need to set your maximum clock speed through the BIOS,
-either through SmokelessUMAF or SD_Unlocker depending on your BIOS version.
+either through SmokelessUMAF or SD_Unlocker depending on your BIOS version. 
+The Steam Deck Oled bios has overclocking built in after steamos 3.5.17 and do not need to be unlocked.
 
 You will need to reinstall the module each SteamOS update as it wipes the file
 system. Hopefully smarter people will make an easier fix, or the limit in the
@@ -52,7 +53,8 @@ control.
 Right now I have only added suport for `6.1.52-valve16`. If you want support for,
 as of writing, stable release `5.*.*`, then use version `0.0.1`.
 
-To add support for your kernel version, enter the linux-header-extract directory and run get.sh. You can then use it for
+To add support for your kernel version, enter the linux-header-extract directory and run get.sh.  Then run `make
+linux-pkg-prepare` followed by `make extract-headers`. You can then use it for
 yourself or submit a PR so others won't need this process.
 
 [1] In addition to what the name of the driver suggests, it also exposes the

@@ -1,5 +1,5 @@
 # Disclaimer
-I am longer actively working on this project, but will accept PRs. If someone is willing to take over this project let me know.
+I am no longer actively working on this project, but will accept PRs. If someone is willing to take over this project let me know.
 
 # Description
 A linux kernel module to override AMD Van Gogh APU PowerPlay limits for CPU.
@@ -29,20 +29,18 @@ value, but this may fail and write to some unknown place in kernel memory which
 BAD™.
 
 # How to build & install
-- Disable read only mode on your SteamDeck
-- Install `base-devel` with pacman
-- `make build` to build
-    - If linux headers are not installed, it will tell which package to install.
-      Once installed, rerun `make build`
-- `sudo make install` to install the module
+- Install `base-devel` and `linux-neptune-61` with pacman.
+  - If it fails to find the linux-neptune package or make fails run `uname -r` and replace 61 with the last 2 numbers.
+- Run `./install.sh`.
 - You can either:
   - Run it in the current boot with `sudo modprobe vangogh_oc_fix
     cpu_default_soft_max_freq=<freq in Mhz>`.
   - Run it every boot with `sudo make install-conf MODULE_FREQ=<freq in Mhz>`.
     you will need to run `sudo modprobe vangogh_oc_fix` to run for the current
     boot.
+- GPU speed is automatically determined.
 
-# How to add support specific kernels
+# How to manually add support specific kernels
 
 This project depends on unstable internel APIs of the amdgpu<sup>[1]</sup>
 driver. In version `0.0.1` I created c header files to mirror the header files

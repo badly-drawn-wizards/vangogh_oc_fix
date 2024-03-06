@@ -10,7 +10,7 @@ if sudo touch /usr/testfileforvangoghocfix 2>/dev/null
         echo Read only is enabled, temporarily disabling.
 fi
 UNAME=$(uname -r)
-if [[ $UNAME == 6.1.52-valve16-1-neptune-611 ]]
+if [[ $UNAME == 6.1.52-valve16-1-neptune-61 ]]
     then
         echo Already have current kernel in source code, installing!
         make build && sudo make install

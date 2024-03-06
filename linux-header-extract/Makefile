@@ -10,12 +10,6 @@ LINUX_SRC_AMD_HEADERS = $(shell find $(LINUX_SRC_AMD_DIR) -name '*.h')
 HEADERS_DIR = ../module/amd_headers/$(LINUX_SRC_KERNEL_VERSION)
 LINUX_HEADERS_ALL_DIRS = $(shell find $(HEADERS_DIR)/drivers -type d)
 
-
-PHONEY += linux-pkg-get
-linux-pkg-get:
-	$(shell ./get.sh)
-
-
 PHONEY += linux-pkg-prepare
 linux-pkg-prepare: | $(LINUX_PKG_DIR)
 	cd $(LINUX_PKG_DIR) && CARCH=x86_64 MAKEPKG_CONF=$(MAKEPKG_CONF) BUILDDIR=$(LINUX_PKG_BUILDDIR) makepkg --nobuild --nocheck --nodeps
@@ -40,3 +34,6 @@ extract-headers: $(HEADERS_DIR)/Makefile $(HEADERS_DIR)/COPYING $(HEADERS_DIR)/L
 
 test:
 	echo $(LINUX_HEADERS_ALL_DIRS)
+
+clean:
+	 rm -rf $(LINUX_PKG_DIR) build

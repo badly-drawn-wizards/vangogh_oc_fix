@@ -1,3 +1,6 @@
+if ls ./linux-pkg
+    then rm -rf ./linux-pkg
+fi
 UNAME=$(uname -r)
 VERSION=$(echo $UNAME |awk -F"-" '{print $NF}')
 CUT=${UNAME/-/.}

@@ -1,5 +1,5 @@
 # Disclaimer
-I am no longer actively working on this project, but will accept PRs. If someone is willing to take over this project let me know.
+I am no longer actively working on this project. @lividhen is the currently maintaining thr project hopefully until a fix is merged into steamos and this project becomes obsolete.
 
 # Description
 A linux kernel module to override AMD Van Gogh APU PowerPlay limits for CPU.

@@ -1,0 +1,9 @@
+[Unit]
+Description=modprobe vangogh oc fix kernel module
+
+[Service]
+Type=simple
+ExecStart=modprobe vangogh_oc_fix
+
+[Install]
+WantedBy=multi-user.target

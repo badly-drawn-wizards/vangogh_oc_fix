@@ -48,5 +48,7 @@ To add support for your kernel version, enter the linux-header-extract directory
 linux-pkg-prepare` followed by `make extract-headers`. You can then use it for
 yourself or submit a PR so others won't need this process.
 
+If you are in need of a different version of the kernel headers is giving you, you can download it from [here](https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/). It is prefaced with linux-neptune (eg linux-neptune-61-6.1.52.valve16-1-x86_64.pkg.tar.zst). Then run `sudo pacman -U /path/to/linux-neptune-headers`.
+
 [1] In addition to what the name of the driver suggests, it also exposes the
 interface that PowerTools uses to adjust the CPU clock.

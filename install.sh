@@ -20,7 +20,7 @@ if [[ $UNAME == 6.1.52-valve16-1-neptune-61 ]]
     else
         echo No kernel sources found. Downloading current kernel from steamos mirror.
         cd linux-header-extract
-        #./get.sh
+        ./get.sh
         make linux-pkg-prepare
         ln -s linux-pkg/build .
         make linux-pkg-prepare

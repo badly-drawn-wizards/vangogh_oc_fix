@@ -17,8 +17,6 @@ You will need to reinstall the module each SteamOS update as it wipes the file
 system. Hopefully smarter people will make an easier fix, or the limit in the
 amdgpu driver will be made configurable.
 
-Autostart service currently broken
-
 # Disclaimer
 This software is distributed under the terms of the GPLv3 license. Please refer
 to the license for the full disclaimer and understand that by using this
@@ -32,12 +30,7 @@ BAD™.
 - Install `base-devel` and `linux-neptune-61` with pacman.
   - If it fails to find the linux-neptune package or make fails run `uname -r` and replace 61 with the last 2 numbers.
 - Run `./install.sh`.
-- You can either:
-  - Run it in the current boot with `sudo modprobe vangogh_oc_fix
-    cpu_default_soft_max_freq=<freq in Mhz>`.
-  - Run it every boot with `sudo make install-conf MODULE_FREQ=<freq in Mhz>`.
-    you will need to run `sudo modprobe vangogh_oc_fix` to run for the current
-    boot.
+  - Enter password and desired cpu clock speed when prompted
 - GPU speed is automatically determined.
 
 # How to manually add support specific kernels
@@ -51,7 +44,7 @@ control.
 Right now I have only added suport for `6.1.52-valve16`. If you want support for,
 as of writing, stable release `5.*.*`, then use version `0.0.1`.
 
-To add support for your kernel version, enter the linux-header-extract directory and run get.sh.  Then run `make
+To add support for your kernel version, enter the linux-header-extract directory and run `get.sh`.  Then run `make
 linux-pkg-prepare` followed by `make extract-headers`. You can then use it for
 yourself or submit a PR so others won't need this process.
 

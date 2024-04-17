@@ -27,7 +27,8 @@ value, but this may fail and write to some unknown place in kernel memory which
 BAD™.
 
 # How to build & install
-- Install `base-devel` and `linux-neptune-61` with pacman.
+- Install `base-devel`, `linux-neptune-61-headers` and `linux-neptune-61` with pacman.
+  - If you don't have enough space to install these packages please install [rwfus](https://github.com/ValShaped/rwfus)
   - If it fails to find the linux-neptune package or make fails run `uname -r` and replace 61 with the last 2 numbers.
 - Run `./install.sh`.
   - Enter password and desired cpu clock speed when prompted

@@ -11,7 +11,7 @@ if sudo touch /usr/testfileforvangoghocfix 2>/dev/null
 fi
 read -p "Desired cpu max clock speed (eg 3800): " clock
 UNAME=$(uname -r)
-if [[ $UNAME == 6.1.52-valve16-1-neptune-61 ]]
+if [[ $UNAME == 6.1.52-valve16-1-neptune-61 ]] || [[ $UNAME == 6.5.0-valve3-3-neptune-65-gf73fe24f1b3a ]]
     then
         echo Already have current kernel in source code, installing!
         make build && sudo make install && sudo make install-conf MODULE_FREQ=$clock

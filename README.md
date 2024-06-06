@@ -6,16 +6,19 @@ A linux kernel module to override AMD Van Gogh APU PowerPlay limits for CPU.
 This is useful if you have overclocked your SteamDeck but still want to use
 PowerTools to set CPU clock limits. You do not need this for GPU overclocking.
 
-Note that you still need a `pt_oc.json` to tell PowerTools that it can go that
-hard. Conversely, the way PowerTools works as of writing this (2023-03-06) will
-not go past stock settings even if you have a `pt_oc.json` but not this module.
+Note that you need to setup [custom overrides](https://git.ngni.us/NG-SD-Plugins/PowerTools/wiki/Customization) to tell PowerTools that it can go that
+hard. Conversely, the way PowerTools works as of writing this (2024-06-06) will
+not go past stock settings even if you have custom overrides.
 Similarly, you still need to set your maximum clock speed through the BIOS,
 either through SmokelessUMAF or SD_Unlocker depending on your BIOS version. 
-The Steam Deck Oled bios has overclocking built in after steamos 3.5.17 and do not need to be unlocked.
+The Steam Deck Oled bios has overclocking built in after BIOS 109 on the OLED
+Steam Deck and after BIOS 131 on the LCD deck, and do not need to be unlocked
+except if you want to override the TDP which requires modifications with [SREP](https://www.stanto.com/steam-deck/how-to-unlock-the-lcd-and-oled-steam-deck-bios-for-increased-tdp-and-other-features/).
 
 You will need to reinstall the module each SteamOS update as it wipes the file
 system. Hopefully smarter people will make an easier fix, or the limit in the
-amdgpu driver will be made configurable.
+amdgpu driver will be made configurable. There are issues raised about this on
+[gitlab](https://gitlab.freedesktop.org/drm/amd/-/issues/2638) and [github](https://github.com/ValveSoftware/SteamOS/issues/1309).
 
 # Disclaimer
 This software is distributed under the terms of the GPLv3 license. Please refer

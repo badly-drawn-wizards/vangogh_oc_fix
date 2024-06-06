@@ -15,7 +15,7 @@ PHONEY := build
 build: module/vangogh_oc_fix.ko.xz
 
 $(HEADERS_BUILD):
-	$(error "Could not find $(HEADERS_BUILD)\nYou probably don't have headers installed. Run 'sudo pacman -S $(PKGBASE)-headers' to install them")
+	$(error "Could not find $(HEADERS_BUILD). You probably don't have headers installed. Run 'sudo pacman -Ss linux-neptune' to find which linux header package to install")
 
 PHONEY += clean
 clean: $(HEADERS_DIR)

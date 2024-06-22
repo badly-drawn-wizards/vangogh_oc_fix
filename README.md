@@ -30,9 +30,11 @@ value, but this may fail and write to some unknown place in kernel memory which
 BAD™.
 
 # How to build & install
-- Install `base-devel`, `linux-neptune-61-headers` and `linux-neptune-61` with pacman.
+- Type `sudo steamos-readonly disable` followed by `sudo pacman -Sy base-devel linux-neptune-61 linux-neptune-61-headers`
   - If you don't have enough space to install these packages please install [rwfus](https://github.com/ValShaped/rwfus)
-  - If it fails to find the linux-neptune package or make fails run `uname -r` and replace 61 with the last 2 numbers.
+  - If it fails to find the linux-neptune package or make fails run:
+    - `uname -r` and compare that with the output of `sudo pacman -Ss linux-neptune`
+  - The output of which should show you which package to install that matches your kernel version
 - Run `./install.sh`.
   - Enter password and desired cpu clock speed when prompted
 - GPU speed is automatically determined.
@@ -45,14 +47,18 @@ in the kernel, but this not a great idea. In this version I copy the header
 files for a specific kernel version and store them for each version in source
 control.
 
-Right now I have only added suport for `6.1.52-valve16`. If you want support for,
-as of writing, stable release `5.*.*`, then use version `0.0.1`.
+Support provided with this repo' is stored in `/module/amd_headers/`.
 
-To add support for your kernel version, enter the linux-header-extract directory and run `get.sh`.  Then run `make
-linux-pkg-prepare` followed by `make extract-headers`. You can then use it for
-yourself or submit a PR so others won't need this process.
+To add support for your kernel version:
+- `cd` to `/linux-header-extract directory` and
+- Type `get.sh`
+- Then type `make -j$(nproc) linux-pkg-prepare`
+- Then type `make -j$(nproc) extract-headers`
 
-If you are in need of a different version of the kernel headers is giving you, you can download it from [here](https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/). It is prefaced with linux-neptune (eg linux-neptune-61-6.1.52.valve16-1-x86_64.pkg.tar.zst). Then run `sudo pacman -U /path/to/linux-neptune-headers`.
+You can then use it for yourself or submit a pull request so others won't need to do this process.
+
+If you are in need of a different version of the kernel headers is giving you, you can download it from [here](https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/).
+It is prefaced with linux-neptune (eg linux-neptune-61-6.1.52.valve16-1-x86_64.pkg.tar.zst). Then run `sudo pacman -U /path/to/linux-neptune-headers`.
 
 [1] In addition to what the name of the driver suggests, it also exposes the
 interface that PowerTools uses to adjust the CPU clock.

@@ -30,14 +30,44 @@ value, but this may fail and write to some unknown place in kernel memory which
 BAD™.
 
 # How to build & install
-- Type `sudo steamos-readonly disable` followed by `sudo pacman -Sy base-devel linux-neptune-61 linux-neptune-61-headers`
-  - If you don't have enough space to install these packages please install [rwfus](https://github.com/ValShaped/rwfus)
-  - If it fails to find the linux-neptune package or make fails run:
-    - `uname -r` and compare that with the output of `sudo pacman -Ss linux-neptune`
-  - The output of which should show you which package to install that matches your kernel version
-- Run `./install.sh`.
-  - Enter password and desired cpu clock speed when prompted
-- GPU speed is automatically determined.
+
+Type the following into a terminal:
+- `sudo steamos-readonly disable`
+- `sudo pacman -Sy base-devel`
+
+Now we need to know what header packages to install.
+- `uname -r`
+With the output of this command you will see something like:
+
+`6.1.52-valve16-1-neptune-61`
+
+Now type:
+- `sudo pacman -Ss linux-neptune`
+
+Which will give you the output such as:
+`jupiter-3.5/linux-neptune-61 6.1.52.valve16-1`
+`jupiter-3.5/linux-neptune-61-headers 6.1.52.valve16-1`
+
+This will tell us the package names that relate to our kernel version.
+We want the ones that match, so in our example, we're running neptune-61, we type:
+
+- sudo pacman -S linux-neptune-61 linux-neptune-61-headers`
+
+Now, onto installing the fix. By default SteamOS will put you into the `/home/deck` folder.
+Using the commands `cd` and `pwd` you can change directory, and also check what directory
+you are in, to be able to navigate to where you have extracted or cloned this repo to.
+If you're unsure how to do this, [learn more about the terminal](https://ubuntu.com/tutorials/command-line-for-beginners).
+Once you're in the correct folder, you can install with:
+
+- `./install.sh`
+
+You should now be prompted for the CPU frequency, enter the same value as you have set in the BIOS.
+GPU frequency is automatically determined, this is solely for the CPU.
+
+If this does not work, read the messages on the screen. If it does not install, then you
+will need to manually add support for your specific kernel (this can happem when SteamOS
+has updated beyond what is supplied with this repo) and then run the install again. Follow
+the instructions below.
 
 # How to manually add support specific kernels
 
@@ -49,13 +79,19 @@ control.
 
 Support provided with this repo' is stored in `/module/amd_headers/`.
 
+Note this will download approximately 3.2gb of data.
+
 To add support for your kernel version:
 - `cd` to `/linux-header-extract directory` and
-- Type `get.sh`
+- Type `./get.sh`
 - Then type `make -j$(nproc) linux-pkg-prepare`
 - Then type `make -j$(nproc) extract-headers`
 
 You can then use it for yourself or submit a pull request so others won't need to do this process.
+
+If you're using SteamOS beta, preview or main then get.sh may not grab the correct file, until
+get.sh is adapted to accommodate for this you will need to manually edit the script to get the
+correct headers file.
 
 If you are in need of a different version of the kernel headers is giving you, you can download it from [here](https://steamdeck-packages.steamos.cloud/archlinux-mirror/jupiter-main/os/x86_64/).
 It is prefaced with linux-neptune (eg linux-neptune-61-6.1.52.valve16-1-x86_64.pkg.tar.zst). Then run `sudo pacman -U /path/to/linux-neptune-headers`.

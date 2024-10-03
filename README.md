@@ -51,7 +51,7 @@ Which will give you the output such as:
 This will tell us the package names that relate to our kernel version.
 We want the ones that match, so in our example, we're running neptune-61, we type:
 
-- sudo pacman -S linux-neptune-61 linux-neptune-61-headers`
+- `sudo pacman -S linux-neptune-61 linux-neptune-61-headers`
 
 Now, onto installing the fix. By default SteamOS will put you into the `/home/deck` folder.
 Using the commands `cd` and `pwd` you can change directory, and also check what directory
